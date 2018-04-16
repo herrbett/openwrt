@@ -79,6 +79,7 @@ ar71xx_setup_interfaces()
 	eap300v2|\
 	eap7660d|\
 	el-mini|\
+	fritz1750e|\
 	fritz300e|\
 	gl-usb150|\
 	hiveap-121|\
