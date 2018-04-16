@@ -80,6 +80,7 @@ ar71xx_setup_interfaces()
 	eap7660d|\
 	el-mini|\
 	fritz300e|\
+	fritz1750e|\
 	gl-usb150|\
 	hiveap-121|\
 	lbe-m5|\

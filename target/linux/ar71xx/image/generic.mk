@@ -1295,3 +1295,17 @@ define Device/fritz300e
 	append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
 endef
 TARGET_DEVICES += fritz300e
+
+define Device/fritz1750e
+  DEVICE_TITLE := AVM FRITZ!WLAN Repeater 1750E
+  DEVICE_PACKAGES := fritz-tffs rssileds -swconfig -uboot-envtools
+  BOARDNAME := FRITZ1750E
+  SUPPORTED_DEVICES := fritz1750e
+  IMAGE_SIZE := 15232k
+  KERNEL := kernel-bin | patch-cmdline | lzma | eva-image
+  KERNEL_INITRAMFS := $$(KERNEL)
+  IMAGE/sysupgrade.bin := append-kernel | pad-to 64k | \
+	append-squashfs-fakeroot-be | pad-to 256 | \
+	append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
+endef
+TARGET_DEVICES += fritz1750e

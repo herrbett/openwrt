@@ -124,6 +124,7 @@ obj-$(CONFIG_ATH79_MACH_EW_BALIN)		+= mach-ew-balin.o
 obj-$(CONFIG_ATH79_MACH_EW_DORIN)		+= mach-ew-dorin.o
 obj-$(CONFIG_ATH79_MACH_F9K1115V2)		+= mach-f9k1115v2.o
 obj-$(CONFIG_ATH79_MACH_FRITZ300E)		+= mach-fritz300e.o
+obj-$(CONFIG_ATH79_MACH_FRITZ1750E)		+= mach-fritz1750e.o
 obj-$(CONFIG_ATH79_MACH_GL_AR150)		+= mach-gl-ar150.o
 obj-$(CONFIG_ATH79_MACH_GL_AR300)		+= mach-gl-ar300.o
 obj-$(CONFIG_ATH79_MACH_GL_AR300M)		+= mach-gl-ar300m.o
