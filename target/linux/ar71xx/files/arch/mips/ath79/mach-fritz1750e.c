@@ -9,18 +9,30 @@
  *  by the Free Software Foundation.
  */
 
-#include <linux/gpio.h>
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
 
+#include <linux/init.h>
+#include <linux/pci.h>
+#include <linux/platform_device.h>
+#include <linux/ath9k_platform.h>
+#include <linux/etherdevice.h>
+
 #include <asm/mach-ath79/ath79.h>
+#include <asm/mach-ath79/irq.h>
 #include <asm/mach-ath79/ar71xx_regs.h>
 
+#include <linux/platform_data/phy-at803x.h>
+#include <linux/ar8216_platform.h>
+
+#include "common.h"
+#include "dev-ap9x-pci.h"
 #include "dev-eth.h"
-#include "dev-wmac.h"
 #include "dev-gpio-buttons.h"
 #include "dev-leds-gpio.h"
 #include "dev-m25p80.h"
+#include "dev-wmac.h"
+#include "dev-usb.h"
 #include "machtypes.h"
 
 #define FRITZ1750E_KEYS_POLL_INTERVAL	 	20 /* msecs */
