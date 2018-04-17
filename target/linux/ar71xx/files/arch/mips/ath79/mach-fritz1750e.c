@@ -9,16 +9,21 @@
  *  by the Free Software Foundation.
  */
 
+#include <linux/pci.h>
 #include <linux/gpio.h>
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
 
-#include "dev-ap9x-pci.h"
+#include <asm/mach-ath79/ath79.h>
+#include <asm/mach-ath79/ar71xx_regs.h>
+
 #include "dev-eth.h"
+#include "dev-wmac.h"
 #include "dev-gpio-buttons.h"
 #include "dev-leds-gpio.h"
 #include "dev-m25p80.h"
 #include "machtypes.h"
+#include "pci.h"
 
 #define FRITZ1750E_KEYS_POLL_INTERVAL	 	20 /* msecs */
 #define FRITZ1750E_KEYS_DEBOUNCE_INTERVAL	(3 * FRITZ300E_KEYS_POLL_INTERVAL)
@@ -52,23 +57,19 @@ static struct flash_platform_data fritz1750e_flash_data = {
 };
 
 static void __init fritz1750e_setup(void) {
-	u8 *mac = (u8 *) KSEG1ADDR(0x1f610008);
-	u8 tmpmac[ETH_ALEN];
 
 	ath79_register_m25p80(&fritz1750e_flash_data);
 
-	ath79_init_mac(tmpmac, mac, -1);
-
+	ath79_register_mdio(0, ~(BIT(0)));
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
-	ath79_eth0_data.mii_bus_dev = &ath79_mdio0_device.dev;
+	ath79_eth0_data.speed = SPEED_1000;
+	ath79_eth0_data.duplex = DUPLEX_FULL;
 	ath79_eth0_data.phy_mask = BIT(0);
-
-	ath79_register_mdio(0, ~BIT(0));
-	ath79_setup_qca955x_eth_cfg(QCA955X_ETH_CFG_RGMII_EN);
 	ath79_register_eth(0);
 
-	ath79_register_wmac_simple();
 
+
+	ath79_register_wmac_simple();
 	ath79_register_pci();
 }
 

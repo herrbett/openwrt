@@ -1298,7 +1298,7 @@ TARGET_DEVICES += fritz300e
 
 define Device/fritz1750e
   DEVICE_TITLE := AVM FRITZ!WLAN Repeater 1750E
-  DEVICE_PACKAGES := fritz-tffs rssileds -swconfig -uboot-envtools
+  DEVICE_PACKAGES := fritz-tffs rssileds kmod-ath10k ath10k-firmware-qca988x -swconfig -uboot-envtools
   BOARDNAME := FRITZ1750E
   SUPPORTED_DEVICES := fritz1750e
   IMAGE_SIZE := 15232k
