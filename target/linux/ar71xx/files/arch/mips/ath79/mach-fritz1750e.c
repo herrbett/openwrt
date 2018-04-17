@@ -9,7 +9,6 @@
  *  by the Free Software Foundation.
  */
 
-#include <linux/pci.h>
 #include <linux/gpio.h>
 #include <linux/mtd/mtd.h>
 #include <linux/mtd/partitions.h>
@@ -23,7 +22,6 @@
 #include "dev-leds-gpio.h"
 #include "dev-m25p80.h"
 #include "machtypes.h"
-#include "pci.h"
 
 #define FRITZ1750E_KEYS_POLL_INTERVAL	 	20 /* msecs */
 #define FRITZ1750E_KEYS_DEBOUNCE_INTERVAL	(3 * FRITZ300E_KEYS_POLL_INTERVAL)
@@ -56,21 +54,40 @@ static struct flash_platform_data fritz1750e_flash_data = {
 	.nr_parts	= ARRAY_SIZE(fritz1750e_flash_partitions),
 };
 
+static struct gpio_keys_button fritz1750e_gpio_keys[] __initdata = {
+	{
+		.desc			= "wps",
+		.type			= EV_KEY,
+		.code			= KEY_WPS_BUTTON,
+		.debounce_interval	= FRITZ1750E_KEYS_DEBOUNCE_INTERVAL,
+		.gpio			= 4,
+		.active_low		= 1,
+	}
+};
+
 static void __init fritz1750e_setup(void) {
+	u8 *urloader = (u8 *) KSEG1ADDR(0x1f000000);
+	u8 lan_mac[ETH_ALEN];
+	ath79_parse_ascii_mac(urloader + 0x8CE, lan_mac);
 
 	ath79_register_m25p80(&fritz1750e_flash_data);
 
-	ath79_register_mdio(0, ~(BIT(0)));
+	ath79_init_mac(ath79_eth0_data.mac_addr,
+	               lan_mac, 0);
+
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
-	ath79_eth0_data.speed = SPEED_1000;
-	ath79_eth0_data.duplex = DUPLEX_FULL;
-	ath79_eth0_data.phy_mask = BIT(0);
+	ath79_eth0_data.mii_bus_dev = &ath79_mdio0_device.dev;
+	ath79_eth0_data.phy_mask = BIT(4);
+	ath79_eth0_pll_data.pll_10 = 0x00001313;
+
+	ath79_register_mdio(0, ~BIT(4));
 	ath79_register_eth(0);
 
 
-
 	ath79_register_wmac_simple();
-	ath79_register_pci();
+	ath79_register_gpio_keys_polled(-1, FRITZ1750E_KEYS_POLL_INTERVAL,
+																ARRAY_SIZE(fritz1750e_gpio_keys),
+																fritz1750e_gpio_keys);
 }
 
 MIPS_MACHINE(ATH79_MACH_FRITZ1750E, "FRITZ1750E",
