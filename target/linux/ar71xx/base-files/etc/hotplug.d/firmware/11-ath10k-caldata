@@ -99,6 +99,8 @@ case "$FIRMWARE" in
 		ath10kcal_extract "caldata" 20480 2116
 		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) +1)
 		;;
+	fritz1750e)
+		ath10kcal_extract "urloader" 6538 2116
 	gl-ar750|\
 	tl-wpa8630)
 		ath10kcal_extract "art" 20480 2116

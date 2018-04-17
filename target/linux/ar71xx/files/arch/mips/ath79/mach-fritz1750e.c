@@ -61,11 +61,15 @@ static void __init fritz1750e_setup(void) {
 
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
 	ath79_eth0_data.mii_bus_dev = &ath79_mdio0_device.dev;
-	ath79_eth0_data.phy_mask = BIT(4);
-	ath79_eth0_pll_data.pll_10 = 0x00001313;
+	ath79_eth0_data.phy_mask = BIT(0);
 
-	ath79_register_mdio(0, ~BIT(4));
+	ath79_register_mdio(0, ~BIT(0));
+	ath79_setup_qca955x_eth_cfg(QCA955X_ETH_CFG_RGMII_EN);
 	ath79_register_eth(0);
+
+	ath79_register_wmac_simple();
+
+	ath79_register_pci();
 }
 
 MIPS_MACHINE(ATH79_MACH_FRITZ1750E, "FRITZ1750E",
