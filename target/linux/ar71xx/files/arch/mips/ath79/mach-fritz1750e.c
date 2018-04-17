@@ -24,7 +24,7 @@
 #include "machtypes.h"
 
 #define FRITZ1750E_KEYS_POLL_INTERVAL	 	20 /* msecs */
-#define FRITZ1750E_KEYS_DEBOUNCE_INTERVAL	(3 * FRITZ300E_KEYS_POLL_INTERVAL)
+#define FRITZ1750E_KEYS_DEBOUNCE_INTERVAL	(3 * FRITZ1750E_KEYS_POLL_INTERVAL)
 
 static struct mtd_partition fritz1750e_flash_partitions[] = {
 	{
