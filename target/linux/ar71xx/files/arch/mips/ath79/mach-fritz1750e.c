@@ -51,23 +51,13 @@ static struct flash_platform_data fritz1750e_flash_data = {
 	.nr_parts	= ARRAY_SIZE(fritz1750e_flash_partitions),
 };
 
-static struct gpio_led fritz1750e_leds_gpio[] __initdata = {
-};
-
-static struct gpio_led fritz1750e_wmac_leds_gpio[] = {
-};
-
-static struct gpio_keys_button fritz1750e_gpio_keys[] __initdata = {
-};
-
 static void __init fritz1750e_setup(void) {
 	u8 *mac = (u8 *) KSEG1ADDR(0x1f610008);
-	u8 *art = (u8 *) KSEG1ADDR(0x1fff0000);
 	u8 tmpmac[ETH_ALEN];
 
 	ath79_register_m25p80(&fritz1750e_flash_data);
 
-	aath79_init_mac(tmpmac, mac, -1);
+	ath79_init_mac(tmpmac, mac, -1);
 
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
 	ath79_eth0_data.mii_bus_dev = &ath79_mdio0_device.dev;
