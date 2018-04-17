@@ -89,10 +89,9 @@ static void __init fritz1750e_setup(void) {
 
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
 	ath79_eth0_data.mii_bus_dev = &ath79_mdio0_device.dev;
-	ath79_eth0_data.phy_mask = BIT(0);
 	ath79_eth0_pll_data.pll_10 = 0x00001313;
 
-	ath79_register_mdio(0, ~BIT(0));
+	ath79_register_mdio(0, 0);
 	ath79_register_eth(0);
 
 
