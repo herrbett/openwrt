@@ -191,6 +191,8 @@ static void __init fritz1750e_setup(void) {
 	u8 *urloader = (u8 *) KSEG1ADDR(0x1f000000);
 	u8 lan_mac[ETH_ALEN];
 
+	gpio_request_one(11, GPIOF_OUT_INIT_HIGH, "ETH0 PHY reset");
+
 	ath79_parse_ascii_mac(urloader + 0x8CE, lan_mac);
 	ath79_register_m25p80(&fritz1750e_flash_data);
 
@@ -217,11 +219,6 @@ static void __init fritz1750e_setup(void) {
 																fritz1750e_gpio_keys);
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(fritz1750e_leds_gpio),
 				 fritz1750e_leds_gpio);
-
- mdelay(1000);
- 	gpio_request_one(11, GPIOF_OUT_INIT_HIGH, "ETH0 PHY reset");
- 	mdelay(1000);
-
 }
 
 MIPS_MACHINE(ATH79_MACH_FRITZ1750E, "FRITZ1750E",
