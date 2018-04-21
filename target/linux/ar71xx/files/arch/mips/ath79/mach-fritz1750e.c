@@ -200,6 +200,8 @@ static void __init fritz1750e_setup(void) {
 	ath79_init_mac(ath79_eth0_data.mac_addr,
 	               lan_mac, 0);
   ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
+	ath79_eth0_data.speed = SPEED_1000;
+	ath79_eth0_data.duplex = DUPLEX_FULL;
  	ath79_eth0_data.mii_bus_dev = &ath79_mdio0_device.dev;
  	ath79_register_eth(0);
 
