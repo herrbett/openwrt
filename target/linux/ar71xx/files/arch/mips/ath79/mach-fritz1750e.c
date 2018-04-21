@@ -34,6 +34,7 @@
 #include "dev-m25p80.h"
 #include "dev-wmac.h"
 #include "dev-usb.h"
+#include "pci.h"
 #include "machtypes.h"
 
 #include <linux/spi/spi_gpio.h>
