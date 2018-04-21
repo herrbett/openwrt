@@ -190,8 +190,10 @@ static struct gpio_keys_button fritz1750e_gpio_keys[] __initdata = {
 static void __init fritz1750e_setup(void) {
 	u8 *urloader = (u8 *) KSEG1ADDR(0x1f000000);
 	u8 lan_mac[ETH_ALEN];
-
-	gpio_request_one(11, GPIOF_OUT_INIT_HIGH, "ETH0 PHY reset");
+	mdelay(100);
+	gpio_request_one(11, GPIOF_OUT_INIT_LOW, "ETH0 PHY reset");
+	mdelay(10);
+	gpio_set_value(11, GPIOF_OUT_INIT_HIGH);
 
 	ath79_parse_ascii_mac(urloader + 0x8CE, lan_mac);
 	ath79_register_m25p80(&fritz1750e_flash_data);
