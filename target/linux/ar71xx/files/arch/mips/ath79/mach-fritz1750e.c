@@ -204,6 +204,8 @@ static void __init fritz1750e_setup(void) {
 
 	ath79_register_wmac_simple();
 
+	ath79_register_pci();
+
 	spi_register_board_info(fritz1750e_spi_info,
 				ARRAY_SIZE(fritz1750e_spi_info));
 
