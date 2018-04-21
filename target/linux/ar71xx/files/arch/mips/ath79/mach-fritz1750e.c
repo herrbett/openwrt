@@ -195,6 +195,8 @@ static void __init fritz1750e_setup(void) {
 	ath79_register_m25p80(&fritz1750e_flash_data);
 
 	mdelay(1000);
+	gpio_request_one(11, GPIOF_OUT_INIT_LOW, "ETH0 PHY reset");
+	mdelay(1000);
 	gpio_request_one(11, GPIOF_OUT_INIT_HIGH, "ETH0 PHY reset");
 	mdelay(1000);
 
