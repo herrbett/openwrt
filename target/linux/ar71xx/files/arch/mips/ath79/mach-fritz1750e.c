@@ -32,6 +32,7 @@
 #include "dev-spi.h"
 #include "dev-wmac.h"
 #include "machtypes.h"
+#include "pci.h"
 
 
 #define FRITZ1750E_GPIO_SHIFT_SER		15   /* DS,   Data Serial Input */
@@ -65,6 +66,9 @@
 #define FRITZ1750E_GPIO_PHY_RESET		11
 #define FRITZ1750E_GPIO_MDIO_CLK		12
 #define FRITZ1750E_GPIO_MDIO_DATA		19
+
+#define FRITZ1750E_GPIO_PEREGRINE_RESET		17
+#define FRITZ1750E_GPIO_PCIE_RESET		18
 
 #define FRTIZ1750E_OFFSET_TFFS1_LAN_MAC		0x58C
 
@@ -210,6 +214,8 @@ static void __init fritz1750e_setup(void) {
 	gpio_request_one(FRITZ1750E_GPIO_MDIO_CLK, GPIOF_OUT_INIT_HIGH, "MDC Pull-UP");
 	gpio_request_one(FRITZ1750E_GPIO_MDIO_DATA, GPIOF_OUT_INIT_HIGH, "MDIO Pull-UP");
 	gpio_request_one(FRITZ1750E_GPIO_PHY_RESET, GPIOF_OUT_INIT_HIGH, "PHY reset");
+	gpio_request_one(FRITZ1750E_GPIO_PEREGRINE_RESET, GPIOF_OUT_INIT_HIGH, "PEREGRINE reset");
+	gpio_request_one(FRITZ1750E_GPIO_PCIE_RESET, GPIOF_OUT_INIT_HIGH, "PCIE reset");
 
 	/* Register PHY device */
 	mdiobus_register_board_info(fritz1750e_mdio_info,
@@ -230,6 +236,9 @@ static void __init fritz1750e_setup(void) {
 
 	/* Initialize 2.4GHz WiFi */
 	ath79_register_wmac_simple();
+
+	/* Initialize 5GHz WiFi */
+	ath79_register_pci();
 
 	/* Register LED shift-register */
 	spi_register_board_info(fritz1750e_spi_info,
