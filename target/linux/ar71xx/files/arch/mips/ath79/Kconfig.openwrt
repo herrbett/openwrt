@@ -1231,6 +1231,7 @@ config ATH79_MACH_WNR2000_V4
 config ATH79_MACH_OCEDO_AP3
 	bool "Ocedo AP3 board support"
 	select SOC_AR724X
+	select ATH79_DEV_AP9X_PCI if PCI
 	select ATH79_DEV_ETH
 	select ATH79_DEV_GPIO_BUTTONS
 	select ATH79_DEV_LEDS_GPIO
