@@ -26,3 +26,15 @@ define Device/ens202ext
   IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | pad-rootfs | check-size $$$$(IMAGE_SIZE)
 endef
 TARGET_DEVICES += ens202ext
+
+define Device/ocedo_ap3
+  DEVICE_TITLE := Ocedo AP3
+  BOARDNAME := OCEDO_AP3
+  KERNEL_SIZE := 1536k
+  IMAGE_SIZE := 13632k
+  MTDPARTS := spi0.0:256k(u-boot)ro,64k(u-boot-env),320k(custom)ro,1536k(kernel),12096k(rootfs),2048k(failsafe)ro,64k(art)ro,13632k@0xa0000(firmware)
+	KERNEL := kernel-bin | patch-cmdline | lzma | uImage lzma
+	KERNEL_INITRAMFS := $$(KERNEL)
+  IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | pad-rootfs | check-size $$$$(IMAGE_SIZE)
+endef
+TARGET_DEVICES += ocedo_ap3

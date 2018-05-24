@@ -161,6 +161,7 @@ enum ath79_mach_type {
 	ATH79_MACH_NBG460N,			/* Zyxel NBG460N/550N/550NH */
 	ATH79_MACH_NBG6616,			/* Zyxel NBG6616 */
 	ATH79_MACH_NBG6716,			/* Zyxel NBG6716 */
+	ATH79_MACH_OCEDO_AP3,			/* Ocedo AP3 */
 	ATH79_MACH_OM2P,			/* OpenMesh OM2P */
 	ATH79_MACH_OM2Pv2,			/* OpenMesh OM2Pv2 */
 	ATH79_MACH_OM2Pv4,			/* OpenMesh OM2Pv4 */

@@ -160,6 +160,7 @@ obj-$(CONFIG_ATH79_MACH_N5Q)			+= mach-n5q.o
 obj-$(CONFIG_ATH79_MACH_NBG460N)		+= mach-nbg460n.o
 obj-$(CONFIG_ATH79_MACH_NBG6716)		+= mach-nbg6716.o
 obj-$(CONFIG_ATH79_MACH_RAMBUTAN)		+= mach-rambutan.o
+obj-$(CONFIG_ATH79_MACH_OCEDO_AP3)			+= mach-ocedo-ap3.o
 obj-$(CONFIG_ATH79_MACH_OM2P)			+= mach-om2p.o
 obj-$(CONFIG_ATH79_MACH_OM5P)			+= mach-om5p.o
 obj-$(CONFIG_ATH79_MACH_OM5P_AC)		+= mach-om5pac.o
