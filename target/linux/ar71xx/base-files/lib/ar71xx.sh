@@ -458,6 +458,9 @@ ar71xx_board_detect() {
 	*"AP152 reference board")
 		name="ap152"
 		;;
+	*"AP3-Raccoon")
+		name="ap3-raccoon"
+		;;
 	*"AP531B0")
 		name="ap531b0"
 		;;

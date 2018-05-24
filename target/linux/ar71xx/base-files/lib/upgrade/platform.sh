@@ -769,7 +769,8 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
-	all0258n)
+	all0258n|\
+	ap3-raccoon)
 		platform_do_upgrade_allnet "0x9f050000" "$ARGV"
 		;;
 	all0305|\
