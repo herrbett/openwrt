@@ -152,10 +152,23 @@ static void __init koala_setup(void)
 
 	/* GMAC0 is connected to the RMGII interface */
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
-	ath79_eth0_data.phy_mask = BIT(5);
+	ath79_eth0_data.phy_mask = BIT(1);
 	ath79_eth0_data.mii_bus_dev = &ath79_mdio0_device.dev;
 
 	ath79_register_eth(0);
+
+
+
+	ath79_register_mdio(1, 0x0);
+
+	ath79_init_mac(ath79_eth1_data.mac_addr, art + KOALA_LAN_MAC_OFFSET, 1);
+
+	/* GMAC0 is connected to the RMGII interface */
+	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
+	ath79_eth1_data.phy_mask = BIT(2);
+	ath79_eth1_data.mii_bus_dev = &ath79_mdio0_device.dev;
+
+	ath79_register_eth(1);
 }
 
 MIPS_MACHINE(ATH79_MACH_KOALA, "KOALA", "OCEDO Koala", koala_setup);
