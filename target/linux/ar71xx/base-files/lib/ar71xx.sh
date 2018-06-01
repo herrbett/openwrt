@@ -765,9 +765,6 @@ ar71xx_board_detect() {
 	*"JWAP230")
 		name="jwap230"
 		;;
-	*"Koala")
-		name="koala"
-		;;
 	*"LAN Turtle")
 		name="lan-turtle"
 		;;
@@ -1352,6 +1349,9 @@ ar71xx_board_detect() {
 		;;
 	*"UniFiAP Outdoor+")
 		name="unifi-outdoor-plus"
+		;;
+	*"Ursus")
+		name="ursus"
 		;;
 	*"WAM250")
 		name="wam250"

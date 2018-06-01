@@ -82,7 +82,6 @@ ar71xx_setup_interfaces()
 	fritz300e|\
 	gl-usb150|\
 	hiveap-121|\
-	koala|\
 	lbe-m5|\
 	loco-m-xw|\
 	mr12|\
@@ -144,6 +143,7 @@ ar71xx_setup_interfaces()
 	tube2h|\
 	unifi|\
 	unifiac-lite|\
+	ursus|\
 	wi2a-ac200i|\
 	wifi-pineapple-nano|\
 	wndap360|\

@@ -27,9 +27,9 @@ define Device/ens202ext
 endef
 TARGET_DEVICES += ens202ext
 
-define Device/koala
-  DEVICE_TITLE := OCEDO Koala
-  BOARDNAME := KOALA
+define Device/urus
+  DEVICE_TITLE := OCEDO Ursus
+  BOARDNAME := URSUS
   DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x
   KERNEL_SIZE := 1536k
   IMAGE_SIZE := 13632k

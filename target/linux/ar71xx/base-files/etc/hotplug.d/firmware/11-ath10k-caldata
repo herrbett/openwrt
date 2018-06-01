@@ -143,10 +143,6 @@ case "$FIRMWARE" in
 		ath10kcal_extract "RFdata" 20480 2116
 		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth1/address) -2)
 		;;
-	koala)
-		ath10kcal_extract "art" 20480 2116
-		ath10kcal_patch_mac $(macaddr_add $(mtd_get_mac_binary art 18) +0)
-		;;
 	om5p-ac)
 		ath10kcal_extract "ART" 20480 2116
 		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) +16)
@@ -155,6 +151,10 @@ case "$FIRMWARE" in
 	rb-921gs-5hpacd-r2|\
 	rb-962uigs-5hact2hnt)
 		ath10kcal_from_file "/sys/firmware/routerboot/ext_wlan_data" 20480 2116
+		;;
+	ursus)
+		ath10kcal_extract "art" 20480 2116
+		ath10kcal_patch_mac $(macaddr_add $(mtd_get_mac_binary art 18) +0)
 		;;
 	wlr8100)
 		ath10kcal_extract "art" 20480 2116

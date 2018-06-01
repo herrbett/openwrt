@@ -1,5 +1,5 @@
 /*
- * OCEDO Koala board support
+ * OCEDO Ursus board support
  * Based on the MR1750 machine file
  *
  * Copyright (c) 2012 Qualcomm Atheros
@@ -36,45 +36,45 @@
 #include "machtypes.h"
 #include "pci.h"
 
-#define KOALA_GPIO_LED_POWER		22
-#define KOALA_GPIO_LED_WLAN_5G		15
-#define KOALA_GPIO_LED_WLAN_2G		14
+#define URSUS_GPIO_LED_POWER		22
+#define URSUS_GPIO_LED_WLAN_5G		15
+#define URSUS_GPIO_LED_WLAN_2G		14
 
-#define KOALA_LAN0_MAC_OFFSET		0
-#define KOALA_LAN1_MAC_OFFSET		0x06
-#define KOALA_WIFI2G_MAC_OFFSET		0x0c
-#define KOALA_WMAC_CALDATA_OFFSET	0x1000
+#define URSUS_LAN0_MAC_OFFSET		0
+#define URSUS_LAN1_MAC_OFFSET		0x06
+#define URSUS_WIFI2G_MAC_OFFSET		0x0c
+#define URSUS_WMAC_CALDATA_OFFSET	0x1000
 
-static struct gpio_led koala_leds_gpio[] __initdata = {
+static struct gpio_led ursus_leds_gpio[] __initdata = {
 	{
-		.name		= "koala:green:wlan58",
-		.gpio		= KOALA_GPIO_LED_WLAN_5G,
+		.name		= "ursus:green:wlan58",
+		.gpio		= URSUS_GPIO_LED_WLAN_5G,
 		.active_low	= 1,
 	},
 	{
-		.name		= "koala:green:wlan2",
-		.gpio		= KOALA_GPIO_LED_WLAN_2G,
+		.name		= "ursus:green:wlan2",
+		.gpio		= URSUS_GPIO_LED_WLAN_2G,
 		.active_low	= 1,
 	}
 };
 
 
-static struct at803x_platform_data koala_at803x_data = {
+static struct at803x_platform_data ursus_at803x_data = {
 	.disable_smarteee = 1,
 	.enable_rgmii_rx_delay = 1,
 	.enable_rgmii_tx_delay = 0,
 	.fixup_rgmii_tx_delay = 1,
 };
 
-static struct mdio_board_info koala_mdio0_info[] = {
+static struct mdio_board_info ursus_mdio0_info[] = {
 	{
 		.bus_id = "ag71xx-mdio.0",
 		.phy_addr = 1,
-		.platform_data = &koala_at803x_data,
+		.platform_data = &ursus_at803x_data,
 	},
 };
 
-static void __init koala_setup_qca955x_eth_cfg(u32 mask,
+static void __init ursus_setup_qca955x_eth_cfg(u32 mask,
 						unsigned int rxd,
 						unsigned int rxdv,
 						unsigned int txd,
@@ -96,7 +96,7 @@ static void __init koala_setup_qca955x_eth_cfg(u32 mask,
 	iounmap(base);
 }
 
-static void __init koala_setup(void)
+static void __init ursus_setup(void)
 {
 	u8 *art = (u8 *)KSEG1ADDR(0x1fff0000);
 	u8 mac[6];
@@ -110,20 +110,20 @@ static void __init koala_setup(void)
 
 	ath79_register_m25p80(NULL);
 
-	ath79_register_leds_gpio(-1, ARRAY_SIZE(koala_leds_gpio),
-				 koala_leds_gpio);
+	ath79_register_leds_gpio(-1, ARRAY_SIZE(ursus_leds_gpio),
+				 ursus_leds_gpio);
 
-	ath79_init_mac(mac, art + KOALA_WIFI2G_MAC_OFFSET, 0);
-	ath79_register_wmac(art + KOALA_WMAC_CALDATA_OFFSET, mac);
+	ath79_init_mac(mac, art + URSUS_WIFI2G_MAC_OFFSET, 0);
+	ath79_register_wmac(art + URSUS_WMAC_CALDATA_OFFSET, mac);
 	ath79_register_pci();
 
-	koala_setup_qca955x_eth_cfg(QCA955X_ETH_CFG_RGMII_EN, 3, 3, 0, 0);
+	ursus_setup_qca955x_eth_cfg(QCA955X_ETH_CFG_RGMII_EN, 3, 3, 0, 0);
 	ath79_register_mdio(0, 0x0);
 
-	mdiobus_register_board_info(koala_mdio0_info,
-				    ARRAY_SIZE(koala_mdio0_info));
+	mdiobus_register_board_info(ursus_mdio0_info,
+				    ARRAY_SIZE(ursus_mdio0_info));
 
-	ath79_init_mac(ath79_eth0_data.mac_addr, art + KOALA_LAN0_MAC_OFFSET, 0);
+	ath79_init_mac(ath79_eth0_data.mac_addr, art + URSUS_LAN0_MAC_OFFSET, 0);
 
 	/* GMAC0 is connected to the RMGII interface */
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
@@ -136,7 +136,7 @@ static void __init koala_setup(void)
 
 	ath79_register_mdio(1, 0x0);
 
-	ath79_init_mac(ath79_eth1_data.mac_addr, art + KOALA_LAN1_MAC_OFFSET, 0);
+	ath79_init_mac(ath79_eth1_data.mac_addr, art + URSUS_LAN1_MAC_OFFSET, 0);
 
 	/* GMAC0 is connected to the RMGII interface */
 	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
@@ -146,4 +146,4 @@ static void __init koala_setup(void)
 	ath79_register_eth(1);
 }
 
-MIPS_MACHINE(ATH79_MACH_KOALA, "KOALA", "OCEDO Koala", koala_setup);
+MIPS_MACHINE(ATH79_MACH_URSUS, "URSUS", "OCEDO URSUS", ursus_setup);

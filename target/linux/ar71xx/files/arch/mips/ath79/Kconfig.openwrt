@@ -949,8 +949,8 @@ config ATH79_MACH_JWAP230
 	select ATH79_DEV_USB
 	select ATH79_DEV_WMAC
 
-config ATH79_MACH_KOALA
-	bool "OCEDO Koala board support"
+config ATH79_MACH_URSUS
+	bool "OCEDO Ursus board support"
 	select SOC_QCA955X
 	select ATH79_DEV_AP9X_PCI if PCI
 	select ATH79_DEV_GPIO_BUTTONS

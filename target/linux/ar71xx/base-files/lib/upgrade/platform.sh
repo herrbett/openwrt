@@ -688,7 +688,6 @@ platform_check_image() {
 	# these boards use metadata images
 	fritz300e|\
 	fritz4020|\
-	koala|\
 	rb-750-r2|\
 	rb-750p-pbr2|\
 	rb-750up-r2|\
@@ -702,7 +701,8 @@ platform_check_image() {
 	rb-map-2nd|\
 	rb-mapl-2nd|\
 	rb-wap-2nd|\
-	rb-wapg-5hact2hnd)
+	rb-wapg-5hact2hnd|\
+	ursus)
 		return 0
 		;;
 	esac
