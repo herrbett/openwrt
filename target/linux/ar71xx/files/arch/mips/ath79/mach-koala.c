@@ -37,14 +37,8 @@
 #include "pci.h"
 
 #define KOALA_GPIO_LED_POWER		22
-#define KOALA_GPIO_LED_WLAN_5G		13
-#define KOALA_GPIO_LED_WLAN_2G		23
-#define KOALA_GPIO_LED_WLAN_SYS		19
-
-#define KOALA_GPIO_BTN_RESET		17
-
-#define KOALA_KEYS_POLL_INTERVAL	20	/* msecs */
-#define KOALA_KEYS_DEBOUNCE_INTERVAL	(3 * KOALA_KEYS_POLL_INTERVAL)
+#define KOALA_GPIO_LED_WLAN_5G		15
+#define KOALA_GPIO_LED_WLAN_2G		14
 
 #define KOALA_LAN0_MAC_OFFSET		0
 #define KOALA_LAN1_MAC_OFFSET		0x06
@@ -53,37 +47,17 @@
 
 static struct gpio_led koala_leds_gpio[] __initdata = {
 	{
-		.name		= "koala:green:power",
-		.gpio		= KOALA_GPIO_LED_POWER,
-		.active_low	= 1,
-	},
-	{
-		.name		= "koala:red:wlan58",
+		.name		= "koala:green:wlan58",
 		.gpio		= KOALA_GPIO_LED_WLAN_5G,
 		.active_low	= 1,
 	},
 	{
-		.name		= "koala:yellow:wlan2",
+		.name		= "koala:green:wlan2",
 		.gpio		= KOALA_GPIO_LED_WLAN_2G,
 		.active_low	= 1,
-	},
-	{
-		.name		= "koala:blue:sys",
-		.gpio		= KOALA_GPIO_LED_WLAN_SYS,
-		.active_low	= 1,
-		},
+	}
 };
 
-static struct gpio_keys_button koala_gpio_keys[] __initdata = {
-	{
-		.desc		= "Reset button",
-		.type		= EV_KEY,
-		.code		= KEY_RESTART,
-		.debounce_interval = KOALA_KEYS_DEBOUNCE_INTERVAL,
-		.gpio		= KOALA_GPIO_BTN_RESET,
-		.active_low	= 1,
-	},
-};
 
 static struct at803x_platform_data koala_at803x_data = {
 	.disable_smarteee = 1,
@@ -95,7 +69,7 @@ static struct at803x_platform_data koala_at803x_data = {
 static struct mdio_board_info koala_mdio0_info[] = {
 	{
 		.bus_id = "ag71xx-mdio.0",
-		.phy_addr = 5,
+		.phy_addr = 1,
 		.platform_data = &koala_at803x_data,
 	},
 };
@@ -138,9 +112,6 @@ static void __init koala_setup(void)
 
 	ath79_register_leds_gpio(-1, ARRAY_SIZE(koala_leds_gpio),
 				 koala_leds_gpio);
-	ath79_register_gpio_keys_polled(-1, KOALA_KEYS_POLL_INTERVAL,
-					ARRAY_SIZE(koala_gpio_keys),
-					koala_gpio_keys);
 
 	ath79_init_mac(mac, art + KOALA_WIFI2G_MAC_OFFSET, 0);
 	ath79_register_wmac(art + KOALA_WMAC_CALDATA_OFFSET, mac);

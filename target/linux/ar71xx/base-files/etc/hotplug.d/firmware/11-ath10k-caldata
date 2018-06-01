@@ -104,10 +104,6 @@ case "$FIRMWARE" in
 		ath10kcal_extract "art" 20480 2116
 		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth0/address) +1)
 		;;
-	koala)
-		ath10kcal_extract "art" 20480 2116
-		ath10kcal_patch_mac $(macaddr_add $(mtd_get_mac_binary art 18) +0)
-		;;
 	mc-mac1200r)
 		ath10kcal_extract "art" 20480 2116
 		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth1/address) -1)
@@ -146,6 +142,10 @@ case "$FIRMWARE" in
 	nbg6716)
 		ath10kcal_extract "RFdata" 20480 2116
 		ath10kcal_patch_mac $(macaddr_add $(cat /sys/class/net/eth1/address) -2)
+		;;
+	koala)
+		ath10kcal_extract "art" 20480 2116
+		ath10kcal_patch_mac $(macaddr_add $(mtd_get_mac_binary art 18) +0)
 		;;
 	om5p-ac)
 		ath10kcal_extract "ART" 20480 2116
