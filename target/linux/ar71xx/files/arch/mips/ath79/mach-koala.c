@@ -46,8 +46,9 @@
 #define KOALA_KEYS_POLL_INTERVAL	20	/* msecs */
 #define KOALA_KEYS_DEBOUNCE_INTERVAL	(3 * KOALA_KEYS_POLL_INTERVAL)
 
-#define KOALA_LAN_MAC_OFFSET		0
-#define KOALA_WIFI2G_MAC_OFFSET		0x06
+#define KOALA_LAN0_MAC_OFFSET		0
+#define KOALA_LAN1_MAC_OFFSET		0x06
+#define KOALA_WIFI2G_MAC_OFFSET		0x0c
 #define KOALA_WMAC_CALDATA_OFFSET	0x1000
 
 static struct gpio_led koala_leds_gpio[] __initdata = {
@@ -129,6 +130,9 @@ static void __init koala_setup(void)
 	ath79_eth0_pll_data.pll_1000 = 0xae000000;
 	ath79_eth0_pll_data.pll_100 = 0xa0000101;
 	ath79_eth0_pll_data.pll_10 = 0xa0001313;
+	ath79_eth1_pll_data.pll_1000 = 0x03000000;
+	ath79_eth1_pll_data.pll_100 = 0x00000101;
+	ath79_eth1_pll_data.pll_10 = 0x00001313;
 
 	ath79_register_m25p80(NULL);
 
@@ -148,7 +152,7 @@ static void __init koala_setup(void)
 	mdiobus_register_board_info(koala_mdio0_info,
 				    ARRAY_SIZE(koala_mdio0_info));
 
-	ath79_init_mac(ath79_eth0_data.mac_addr, art + KOALA_LAN_MAC_OFFSET, 0);
+	ath79_init_mac(ath79_eth0_data.mac_addr, art + KOALA_LAN0_MAC_OFFSET, 0);
 
 	/* GMAC0 is connected to the RMGII interface */
 	ath79_eth0_data.phy_if_mode = PHY_INTERFACE_MODE_RGMII;
@@ -161,7 +165,7 @@ static void __init koala_setup(void)
 
 	ath79_register_mdio(1, 0x0);
 
-	ath79_init_mac(ath79_eth1_data.mac_addr, art + KOALA_LAN_MAC_OFFSET, 1);
+	ath79_init_mac(ath79_eth1_data.mac_addr, art + KOALA_LAN1_MAC_OFFSET, 0);
 
 	/* GMAC0 is connected to the RMGII interface */
 	ath79_eth1_data.phy_if_mode = PHY_INTERFACE_MODE_SGMII;
