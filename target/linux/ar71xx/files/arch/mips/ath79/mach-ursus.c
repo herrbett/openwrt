@@ -146,4 +146,4 @@ static void __init ursus_setup(void)
 	ath79_register_eth(1);
 }
 
-MIPS_MACHINE(ATH79_MACH_URSUS, "URSUS", "OCEDO URSUS", ursus_setup);
+MIPS_MACHINE(ATH79_MACH_URSUS, "URSUS", "OCEDO Ursus", ursus_setup);
