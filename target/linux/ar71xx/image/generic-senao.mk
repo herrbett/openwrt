@@ -27,7 +27,7 @@ define Device/ens202ext
 endef
 TARGET_DEVICES += ens202ext
 
-define Device/urus
+define Device/ursus
   DEVICE_TITLE := OCEDO Ursus
   BOARDNAME := URSUS
   DEVICE_PACKAGES := kmod-ath10k ath10k-firmware-qca988x
