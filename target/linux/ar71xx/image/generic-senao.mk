@@ -38,4 +38,4 @@ define Device/urus
   KERNEL_INITRAMFS := $$(KERNEL)
   IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | pad-rootfs | append-metadata | check-size $$$$(IMAGE_SIZE)
 endef
-TARGET_DEVICES += koala
+TARGET_DEVICES += ursus
