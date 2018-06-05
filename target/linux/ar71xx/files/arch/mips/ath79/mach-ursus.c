@@ -36,7 +36,6 @@
 #include "machtypes.h"
 #include "pci.h"
 
-#define URSUS_GPIO_LED_POWER		22
 #define URSUS_GPIO_LED_WLAN_5G		15
 #define URSUS_GPIO_LED_WLAN_2G		14
 
