@@ -1,6 +1,6 @@
 /*
  * OCEDO Ursus board support
- * Based on the MR1750 machine file
+ * Based on the OCEDO Koala machine file
  *
  * Copyright (c) 2012 Qualcomm Atheros
  * Copyright (c) 2012-2013 Marek Lindner <marek@open-mesh.com>
@@ -131,8 +131,6 @@ static void __init ursus_setup(void)
 	ath79_eth0_data.mii_bus_dev = &ath79_mdio0_device.dev;
 
 	ath79_register_eth(0);
-
-
 
 	ath79_register_mdio(1, 0x0);
 
