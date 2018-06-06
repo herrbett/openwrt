@@ -5,6 +5,7 @@
  * Copyright (c) 2012 Qualcomm Atheros
  * Copyright (c) 2012-2013 Marek Lindner <marek@open-mesh.com>
  * Copyright (c) 2018 David Bauer <mail@david-bauer.net>
+ * Copyright (c) 2018 Simon Terzenbach <simon@terzenba.ch>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
